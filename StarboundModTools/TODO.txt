@@ -1,0 +1,10 @@
+﻿TODO List:
+Make a starbound gui editor.
+Make a general launch UI.
+
+Commands:
+Create empty mod
+
+Config to
+	Save/Load to disk.
+	These are lists of keypairvalues.

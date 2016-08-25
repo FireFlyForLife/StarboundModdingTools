@@ -46,8 +46,10 @@ namespace StarboundModTools
             return null;
         }
 
-        public ICommand Input(String str) {
-            String[] args = str.Split(' ');
+        public ICommand Input(String[] args) {
+            if (args == null || args.Length == 0)
+                return null;
+
             foreach(ICommand c in commands) {
                 if (c.Name.Equals(args[0])) {
 

@@ -12,7 +12,8 @@ namespace StarboundModTools
         static void Main(string[] args) {
             for (int i = 0; i < args.Length; i++) {
                 Console.WriteLine(i.ToString() + ": " + args[i]);
-                ProcessUtils.StartProcess(args[i]);
+                //ProcessUtils.StartProcess(args[i]);
+                SVars.Add("game", args[i]);
             }
 
             new MainManager();

@@ -24,12 +24,24 @@ namespace StarboundModTools
             List<ICommand> ret = new List<ICommand>();
             ret.Add(new Help());
             ret.Add(new Vars());
-            ret.Add(new Start());
+            Start start = new Start();
+            ret.Add(start);
+            ret.Add(new Close(start));
             ret.Add(new AliasProvider() );
             ret.Add(new Echo());
             ret.Add(new Config());
-            Exit exit = new Exit(); ret.Add(exit);
+            Exit exit = new Exit();
+            ret.Add(exit);
             ret.Add(new Alias("stop", exit));
+            ret.Add(new Equals());
+            Packing packer = new Packing();
+            ret.Add(packer);
+            ret.Add(new Alias("pack", new String[] { "pack" }, packer));
+            ret.Add(new Alias("unpack", new String[] { "unpack" }, packer));
+            ret.Add(new Test());
+            GuiDesigner designer = new GuiDesigner();
+            ret.Add(designer);
+            ret.Add(new Alias("ui", designer));
 
             return ret;
         }

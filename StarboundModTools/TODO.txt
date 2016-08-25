@@ -1,10 +1,11 @@
 ﻿TODO List:
 Make a starbound gui editor.
+Split the Command line framework and StarboundModdingTools in different projects.
 Make a general launch UI.
 
 Commands:
 Create empty mod
+Packing/unpacking assets
 
 Config to
-	Save/Load to disk.
-	These are lists of keypairvalues.
+	Save/Load to disk. V

@@ -13,6 +13,7 @@ namespace StarboundModTools.Command
     {
         Dictionary<String, List<String>> configs;
 
+        //TODO: Add auto loading config
         public Config() {
             configs = new Dictionary<string, List<string>>();
         }
@@ -67,7 +68,10 @@ namespace StarboundModTools.Command
                 else if (args[1].Equals("save"))
                     Save(args[2], args.Length > 3 ? args[3] : args[2] + ".conf");
                 else if (args[1].Equals("load")) {
-                    Load(args[2], args.Length > 3 ? args[3] : args[2].Substring(0, args[2].Length - ".conf".Length));
+                    if(args[2].EndsWith(".conf"))
+                        Load(args[2], args.Length > 3 ? args[3] : args[2].Substring(0, args[2].Length - ".conf".Length));
+                    else
+                        Load(args[2], args.Length > 3 ? args[3] : args[2]);
                 }
             } 
         }
@@ -91,50 +95,47 @@ namespace StarboundModTools.Command
         }
 
         void ShowList(String name) {
-            if (!configs.ContainsKey(name))
-                Console.WriteLine("A config named: " + name + " does not exist.");
-            else {
-                List<String> l;
-                if (configs.TryGetValue(name, out l)) {
-                    Console.Write("Config " + name + " contains the keys: ");
-                    for (int i = 0; i < l.Count; i++) {
-                        Console.Write(l.ElementAt(i));
-                        if (i < l.Count - 1)
-                            Console.Write(", ");
-                    }
-                    Console.WriteLine();
+            List<String> l;
+            if (configs.TryGetValue(name, out l)) {
+                Console.Write("Config " + name + " contains the keys: ");
+                for (int i = 0; i < l.Count; i++) {
+                    Console.Write(l.ElementAt(i));
+                    if (i < l.Count - 1)
+                        Console.Write(", ");
                 }
-            }
+                Console.WriteLine();
+           } else {
+                Console.WriteLine("A config named: " + name + " does not exist.");
+           }
         }
 
         void Add(String name, String key) {
-            if (!configs.ContainsKey(name))//TODO: replace this with the TryGetValue statement below
-                Console.WriteLine("A config named: " + name + " does not exist");
-            else {
-                List<String> l;
-                if(configs.TryGetValue(name, out l)) {
-                    if (!l.Contains(key)) {
-                        l.Add(key);
-                        Console.WriteLine("Succesfully added key: " + key + " to config: " + name);
-                    }
+            List<String> l;
+            if(configs.TryGetValue(name, out l)) {
+                if (!l.Contains(key)) {
+                    l.Add(key);
+                    Console.WriteLine("Succesfully added key: " + key + " to config: " + name);
                 }
+            } else {
+                Console.WriteLine("A config named: " + name + " does not exist");
             }
         }
 
         void Del(String name, String key) {
-            if(!configs.ContainsKey(name))//TODO: replace this with the TryGetValue statement below
-                Console.WriteLine("A config named: " + name + " does not exist");//TODO: look for more of these
-            else {
-                List<String> l;
-                if (configs.TryGetValue(name, out l)) {
-                    if (l.Remove(key))
-                        Console.WriteLine("Succesfully removed key: " + key + " from the config: " + name);
-                    else
-                        Console.WriteLine("Did not find key: " + key + " in config: " + name);
-                }
+            List<String> l;
+            if (configs.TryGetValue(name, out l)) {
+                if (l.Remove(key))
+                    Console.WriteLine("Succesfully removed key: " + key + " from the config: " + name);
+                else
+                   Console.WriteLine("Did not find key: " + key + " in config: " + name);
+            } else {
+                Console.WriteLine("A config named: " + name + " does not exist");
             }
         }
 
+        //LOOKAT: Check if key doesnt have ':' in it.
+        //MAYBE: Find more dangerous chars
+        //TODO: Save booleans differently
         void Save(String name, String file) {
             List<String> l;
             if (configs.TryGetValue(name, out l)) {
@@ -152,30 +153,31 @@ namespace StarboundModTools.Command
                 Console.WriteLine("Could not find config: " + name);
         }
 
+        //TODO: Load Booleans differently
         void Load(String file, String name) {
             if (configs.ContainsKey(name))
                 Console.WriteLine("Config: " + name + " already exists");
             else {
                 try {
                     using (StreamReader sw = File.OpenText(file)) {
-                        //TODO: Read a entry, save add to string list, then register Svar.
                         List<String> keys = new List<string>();
-                        String line = sw.ReadLine();
-                        while (line != null) { //TODO: change to for loop... obviously
-                            String[] kvp = line.Split(':');
-                            if (kvp.Length >= 2) {
-                                keys.Add(kvp[0]);
-                                SVars.Add(kvp[0], kvp[1]);
+                        for(String line = sw.ReadLine(); line != null; line = sw.ReadLine()) {
+                            int split = line.IndexOf(':');
+                            if(split != -1) { 
+                                String key = line.Substring(0, split);
+                                String value = line.Substring(split + 1);
+                                keys.Add(key);
+                                SVars.Add(key, value);
                             } else
                                 Console.WriteLine("line in file {0} is not standard", file);
 
                             line = sw.ReadLine();
                         }
                         configs.Add(name, keys);
-                        Console.WriteLine("Succesfully saved config: " + name + " to file: " + file);
+                        Console.WriteLine("Succesfully loaded config: " + name + " to file: " + file);
                     }
                 } catch (IOException ex) {
-                    Console.WriteLine(ex.Message);
+                    Console.WriteLine("Something went wront loading: {0}", ex.Message);
                 }
             }
         }

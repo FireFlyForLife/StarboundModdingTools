@@ -11,12 +11,8 @@ namespace StarboundModTools.Tests
     public class Tests
     {
         [TestMethod]
-        public void CastTypeTest() {
-            Assert.IsTrue(notCasted("heello"));
-        }
-
-        bool notCasted(Object o) {
-            return o.GetType().Equals(typeof(String));
+        public void MyTestMethod() {
+            
         }
     }
 }

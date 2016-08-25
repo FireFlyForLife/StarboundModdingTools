@@ -7,9 +7,11 @@ using System.Threading.Tasks;
 
 namespace StarboundModTools
 {
-    public static class WinApi
+    public static partial class WinApi
     {
-        [DllImport("win32")]//TODO: get correct names
-        public static extern bool AttachConsole();
+        //MAYBE: Split all p/Invokes in their own file, but in the same partial class.
+        //[DllImport("kernel32", SetLastError = true)]
+        //[return: MarshalAs(UnmanagedType.Bool)]
+        //public static extern bool AttachConsole(int dwProcess);
     }
 }

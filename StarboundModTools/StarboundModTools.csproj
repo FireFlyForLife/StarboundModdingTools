@@ -34,8 +34,17 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json.Schema, Version=2.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.Schema.2.0.2\lib\net45\Newtonsoft.Json.Schema.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
@@ -48,33 +57,68 @@
   <ItemGroup>
     <Compile Include="CommandManager.cs" />
     <Compile Include="Command\Alias.cs" />
+    <Compile Include="Command\Close.cs" />
     <Compile Include="Command\Config.cs" />
+    <Compile Include="Command\Create.cs" />
     <Compile Include="Command\Echo.cs" />
+    <Compile Include="Command\Equals.cs" />
     <Compile Include="Command\Exit.cs" />
+    <Compile Include="Command\GuiDesigner.cs" />
     <Compile Include="Command\Help.cs" />
     <Compile Include="Command\ICommand.cs" />
+    <Compile Include="Command\Packing.cs" />
     <Compile Include="Command\Start.cs" />
+    <Compile Include="Command\Test.cs" />
     <Compile Include="Command\Vars.cs" />
+    <Compile Include="ConsoleListener.cs" />
     <Compile Include="ConsoleWorker.cs" />
+    <Compile Include="Interfaces\ISwitchable.cs" />
     <Compile Include="MainManager.cs" />
     <Compile Include="ProcessUtils.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SVars.cs" />
     <Compile Include="Tests\Tests.cs" />
+    <Compile Include="UI\Designer\JsonTextWriterThing.cs" />
+    <Compile Include="UI\Designer\Nodes\DefaultNode.cs" />
+    <Compile Include="UI\Designer\Nodes\NodeManager.cs" />
+    <Compile Include="UI\Designer\Nodes\Image.cs" />
+    <Compile Include="UI\Designer\Nodes\Node.cs" />
+    <Compile Include="UI\Designer\Nodes\Label.cs" />
+    <Compile Include="UI\Designer\SBUIDesignerUtils.cs" />
+    <Compile Include="UI\Designer\SBUINodeManager.cs" />
+    <Compile Include="UI\Designer\UITreeNode.cs" />
+    <Compile Include="UI\Designer\UITreeView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Designer\DrawPanel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Designer\SBUIDesigner.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Designer\SBUIDesigner.Designer.cs">
+      <DependentUpon>SBUIDesigner.cs</DependentUpon>
+    </Compile>
     <Compile Include="WinApi.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Forms\" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="TODO.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Forms\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="UI\Designer\SBUIDesigner.resx">
+      <DependentUpon>SBUIDesigner.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

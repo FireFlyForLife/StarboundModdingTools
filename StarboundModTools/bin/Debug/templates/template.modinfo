@@ -1,0 +1,11 @@
+{
+  "name" : "your_mod_name",
+  "version" : "Beta v. Glad Giraffe",
+  "path" : ".",
+  "dependencies" : [],
+  "metadata" : {
+    "author" : "",
+    "version" : "0.1",
+    "description" : "your_mod_description"
+  }
+}

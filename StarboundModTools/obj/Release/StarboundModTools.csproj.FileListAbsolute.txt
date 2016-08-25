@@ -1,0 +1,7 @@
+C:\Users\Maiko\Source\Repos\StarboundModdingTools\StarboundModTools\bin\Release\StarboundModTools.exe.config
+C:\Users\Maiko\Source\Repos\StarboundModdingTools\StarboundModTools\bin\Release\StarboundModTools.exe
+C:\Users\Maiko\Source\Repos\StarboundModdingTools\StarboundModTools\bin\Release\StarboundModTools.pdb
+C:\Users\Maiko\Source\Repos\StarboundModdingTools\StarboundModTools\bin\Release\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\Maiko\Source\Repos\StarboundModdingTools\StarboundModTools\obj\Release\StarboundModTools.csprojResolveAssemblyReference.cache
+C:\Users\Maiko\Source\Repos\StarboundModdingTools\StarboundModTools\obj\Release\StarboundModTools.exe
+C:\Users\Maiko\Source\Repos\StarboundModdingTools\StarboundModTools\obj\Release\StarboundModTools.pdb

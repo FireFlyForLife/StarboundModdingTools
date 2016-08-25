@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace StarboundModTools
@@ -24,8 +25,9 @@ namespace StarboundModTools
             do {
                 Console.Write(">");
                 line = Console.ReadLine();
+                String[] args = splitArgs(line);
 
-                ICommand c = cm.Input(line);
+                ICommand c = cm.Input(args);
                 if (c == null && line != exitString) Console.WriteLine("Unknown command");
 
             } while (!SVars.getValue<bool>("exit") && !exitString.Equals(line));
@@ -33,8 +35,12 @@ namespace StarboundModTools
         }
 
         public String[] splitArgs(String full) {
-            //TODO: Add double quotationmark detection
-            return full.Split(' ');
+            String[] args = Regex.Matches(full, @"[\""].+?[\""]|[^ ]+")
+                .Cast<Match>()
+                .Select(m => m.Value.Replace("\"", String.Empty))
+                .ToArray();
+            
+            return args;
         }
     }
 }

@@ -40,7 +40,7 @@ namespace StarboundModTools.Command
             }
             if(args.Length > 2 && args[1].Equals("get"))
                 Console.WriteLine(SVars.getValue<Object>(args[2])?.ToString());
-            if (args.Length > 3 && args[1].Equals("set"))//TODO: add solution of other types, ex: Booleans
+            if (args.Length > 3 && args[1].Equals("set"))//LOOKAT: add solution of other types, ex: Booleans
                 if (SVars.getValue<object>(args[2]) != null) {
                     SVars.Change(args[2], args[3]);
                 } else {

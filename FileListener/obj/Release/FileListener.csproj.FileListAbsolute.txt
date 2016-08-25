@@ -1,0 +1,6 @@
+C:\Users\Maiko\Source\Repos\StarboundModdingTools\FileListener\bin\Release\FileListener.exe.config
+C:\Users\Maiko\Source\Repos\StarboundModdingTools\FileListener\bin\Release\FileListener.exe
+C:\Users\Maiko\Source\Repos\StarboundModdingTools\FileListener\bin\Release\FileListener.pdb
+C:\Users\Maiko\Source\Repos\StarboundModdingTools\FileListener\obj\Release\FileListener.exe
+C:\Users\Maiko\Source\Repos\StarboundModdingTools\FileListener\obj\Release\FileListener.pdb
+C:\Users\Maiko\Source\Repos\StarboundModdingTools\FileListener\obj\Release\FileListener.csprojResolveAssemblyReference.cache

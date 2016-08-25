@@ -8,6 +8,10 @@ namespace StarboundModTools.Command
 {
     public class Echo : ICommand
     {
+        public Echo() {
+            SVars.Register("echo_axis", "horizontal");
+        }
+
         public string Description
         {
             get
@@ -28,17 +32,29 @@ namespace StarboundModTools.Command
         {
             get
             {
-                return "Usage: echo <message>... - Echo's all the messages in the command prompt.";
+                return "Usage: echo <message>... - Echo's all the messages in the command prompt." +
+                    "\nIf you want the words to be echoed vertically, set the variable 'echo_axis' to vertical." +
+                    "\nEnter: help var - for more information.";
             }
         }
 
         public void Run(string[] args) {
-            for(int i = 1; i < args.Length; i++) {
-                Console.Write(args[i]);
-                if (i != args.Length)
-                    Console.Write(" ");
+            String axis = SVars.getValue<String>("echo_axis");
+            if (axis.Equals("vertical")) {
+                for(int i = 1; i < args.Length; i++) {
+                    Console.WriteLine(args[i]);
+                }
+            } else {
+                for (int i = 1; i < args.Length; i++) {
+                    Console.Write(args[i]);
+                    if (i < args.Length - 1)
+                        Console.Write(" ");
+                }
+                Console.WriteLine();
+                if (!axis.Equals("horizontal"))
+                    Console.WriteLine("Variable 'echo_axis' is not a known value, known values are: horizontal, vertical." + 
+                        "\nResorting to defualt value: horizontal.");
             }
-            Console.WriteLine();
         }
     }
 }

@@ -21,16 +21,18 @@ namespace StarboundModTools
             if (vars.TryGetValue(key, out o) && o.GetType().Equals(value.GetType())) {
                 vars.Remove(key);
                 vars.Add(key, value);
+                Console.WriteLine("Changed the value of key: {0} to value {1}", key, value.ToString());
             } else
                 Console.WriteLine("error: stored value has type '" + o.GetType().Name + "' while new value has type '" + value.GetType().Name + "'.");
         }
 
         public static void Add(String key, Object value) {
             Object o;
-            if (vars.TryGetValue(key, out o))
+            if (vars.TryGetValue(key, out o)) {
                 Change(key, value);
-            else
+            } else {
                 Register(key, value);
+            }
         }
 
         public static T getValue<T> (String key) {
